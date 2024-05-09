@@ -65,7 +65,7 @@ trait HasAttribute
      */
     public function getMessage()
     {
-        return $this->message;
+        return isset($this->message) ? $this->message : null;
     }
 
     /**
