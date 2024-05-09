@@ -1,0 +1,19 @@
+{
+    "name": "alirezajavadi/jsonize",
+    "description": "JSONize: Standardize JSON responses effortlessly! Ensure consistency in your applications with our streamlined library. Simplify data formatting, enhance readability, and save time. JSONize empowers developers to generate clean, organized JSON outputs, perfect for APIs, web, and mobile apps. Revolutionize your workflow today!",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alireza Javadi",
+            "email": "e@alirezajawadi.ir"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {
+            "JSONize\\": "src/"
+        }
+    }
+}
