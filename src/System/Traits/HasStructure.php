@@ -67,6 +67,22 @@ trait HasStructure
         $result["success"] = (int)$this->getStatus() >= 200 && (int)$this->getStatus() <= 300 ? true : false;
         $result["message"] = $this->getMessage(); // Set 'message' field
         $result["data"] = $this->getData(); // Set 'data' field
+        $result["status"] = $this->getHttpStatus(); // Set 'data' field
         return json_encode($result); // Encode response data into JSON and return
+    }
+
+    private function getHttpStatus()
+    {
+        switch ($this->getStatus()) {
+            case 200:
+                return [200, "ok"];
+                break;
+            case 404:
+                return [404, "Not Found"];
+                break;
+            case 204:
+                return [204, "No Content"];
+                break;
+        }
     }
 }
