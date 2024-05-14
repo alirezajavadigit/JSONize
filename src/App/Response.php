@@ -23,11 +23,12 @@
 namespace JSONize\App; // Namespace declaration for the JSONize\App package
 
 use JSONize\System\Traits\HasAttribute;
+use JSONize\System\Traits\HasStatus;
 use JSONize\System\Traits\HasStructure;
 use JSONize\System\Traits\MethodCaller; // Importing the MethodCaller trait from the JSONize\System\Traits namespace
 use JSONize\System\Traits\Singleton; // Importing the Singleton trait from the JSONize\System\Traits namespace
 
 class Response
 {
-    use Singleton, MethodCaller, HasAttribute, HasStructure;
+    use Singleton, MethodCaller, HasAttribute, HasStructure, HasStatus;
 }
