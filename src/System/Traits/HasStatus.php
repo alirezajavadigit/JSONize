@@ -30,10 +30,10 @@ trait HasStatus
      *
      * @return array An array containing the HTTP status code and message.
      */
-    private function getHttpStatus()
+    private function getHttpStatus($status)
     {
         // Switch statement to handle different internal status codes.
-        switch ($this->getStatus()) {
+        switch ($status) {
             case 100:
                 return [100, "Continue"]; // Returns status code 100 and message.
                 break;
