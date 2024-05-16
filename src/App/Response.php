@@ -30,5 +30,5 @@ use JSONize\System\Traits\Singleton; // Importing the Singleton trait from the J
 
 class Response
 {
-    use Singleton, MethodCaller, HasAttribute, HasStructure, HasStatus;
+    use Singleton, MethodCaller, HasStatus, HasAttribute, HasStructure;
 }
