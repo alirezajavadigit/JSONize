@@ -67,7 +67,7 @@ trait HasStructure
         $result["success"] = (int)$this->getStatus() >= 200 && (int)$this->getStatus() <= 300 ? true : false;
         $result["message"] = $this->getMessage(); // Set 'message' field
         $result["data"] = $this->getData(); // Set 'data' field
-        $result["status"] = $this->getHttpStatus(); // Set 'status' field
+        $result["status"] = $this->getHttpStatus($this->getStatus()); // Set 'status' field
         return json_encode($result); // Encode response data into JSON and return
     }
 }
