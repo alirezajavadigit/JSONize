@@ -16,69 +16,119 @@ composer require alirezajavadi/jsonize
 
 Once JSONize is installed, you can start using it in your projects. Here's a basic example of how to use JSONize:
 
+# New Features in v1.5.1
+
+#### Easy Syntax
+
+For a more straightforward syntax, use:
+
+```php
+<?php
+
+use JSONize\App\Easy\Response;
+
+// Example 1: Success
+Response::message("Deleted Successfully");
+/*
+{
+    "success": true,
+    "message": "Deleted Successfully",
+    "data": null,
+    "status": [
+        200,
+        "ok"
+    ]
+}
+*/
+
+// Example 2: Error
+Response::message("User Not Found")->status(404);
+/*
+{
+    "success": false,
+    "message": "User Not Found",
+    "data": null,
+    "status": [
+        404,
+        "Not Found"
+    ]
+}
+*/
+
+// Example 3: No Content
+Response::status(204);
+/*
+{
+    "success": true,
+    "message": null,
+    "data": null,
+    "status": [
+        204,
+        "No Content"
+    ]
+}
+*/
+```
+
+#### Efficient Memory Usage
+
+For efficient usage and memory safety, use:
+
 ```php
 <?php
 //init
-use JSONize\App\Response;
+use JSONize\App\Efficient\Response;
 
 $response = Response::getInstance();
-//
 
-// Examples:
-
-// 1. Success Example
-$response->message("Deleted SuccessFully")->end();
+// Example 1: Success
+$response->message("Deleted Successfully")->end();
 /*
-result
-    {
-        "success": true,
-        "message": "Deleted SuccessFully",
-        "data": null,
-        "status": [
-            200,
-            "ok"
-        ]
-    }
+{
+    "success": true,
+    "message": "Deleted Successfully",
+    "data": null,
+    "status": [
+        200,
+        "ok"
+    ]
+}
 */
 
-// 2. Error Example
+// Example 2: Error
 $response->message("User Not Found")->status(404)->end();
 /*
-result
-    {
-        "success": false,
-        "message": "User Not Found",
-        "data": null,
-        "status": [
-            404,
-            "Not Found"
-        ]
-    }
-
+{
+    "success": false,
+    "message": "User Not Found",
+    "data": null,
+    "status": [
+        404,
+        "Not Found"
+    ]
+}
 */
 
-// 3. Other Example
+// Example 3: No Content
 $response->status(204)->end();
 /*
-result
-    {
-        "success": true,
-        "message": null,
-        "data": null,
-        "status": [
-            204,
-            "No Content"
-        ]
-    }
+{
+    "success": true,
+    "message": null,
+    "data": null,
+    "status": [
+        204,
+        "No Content"
+    ]
+}
 */
-/*
-note the end() is important to use;
-*/
+// Note: `end()` is important to use.
+
 ```
 
 ### Contributing
 
-Contributions are welcome! Please feel free to submit a pull request or open an issue if you encounter any problems or have suggestions for improvements.
+Contributions are welcome! Everyone who wants to contribute can add new HTTP status codes to this file: System/Traits/HasStatus.php. Submit a pull request or open an issue for any problems or suggestions.
 
 ### License
 
