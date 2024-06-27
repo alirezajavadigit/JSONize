@@ -25,14 +25,14 @@ namespace JSONize\System\Traits;
 trait HasStructure
 {
     /**
-     * Set the end of the response.
+     * Set the get of the response.
      *
      * @return string The formatted JSON response.
      * 
      * This method sets the necessary HTTP headers for JSON response and formats the
      * response data into a JSON object. It then returns the formatted JSON response.
      */
-    private function setEnd(): string
+    private function setGet(): string
     {
         header('Content-Type: application/json'); // Set content type header to JSON
         $this->extractHeaders(); // Extract and set custom headers
