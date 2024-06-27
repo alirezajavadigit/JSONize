@@ -20,7 +20,7 @@
 |--------------------------------------------------------------------------
 */
 
-namespace JSONize\System\Traits;
+namespace JSONize\System\Traits\Efficient;
 
 trait Singleton
 {
