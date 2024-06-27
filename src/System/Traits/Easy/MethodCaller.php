@@ -20,7 +20,7 @@
 |--------------------------------------------------------------------------
 */
 
-namespace JSONize\System\Traits;
+namespace JSONize\System\Traits\Easy;
 
 trait MethodCaller
 {
@@ -33,8 +33,7 @@ trait MethodCaller
      */
     public function __call(string $method, array $args): mixed
     {
-        // Call the methodCaller method of the current instance with provided arguments.
-        return self::$instance->methodCaller(self::$instance, $method, $args);
+        return $this->methodCaller($this, $method, $args);
     }
 
     /**
@@ -46,8 +45,9 @@ trait MethodCaller
      */
     public static function __callStatic(string $method, array $args): mixed
     {
-        // Call the methodCaller method of the current instance with provided arguments.
-        return self::$instance->methodCaller(self::$instance, $method, $args);
+        $className = get_called_class();
+        $instance = new $className;
+        return $instance->methodCaller($instance, $method, $args);
     }
 
     /**
