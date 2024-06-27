@@ -20,15 +20,22 @@
 |--------------------------------------------------------------------------
 */
 
-namespace JSONize\App; //Namespace declaration for the JSONize\App package
+namespace JSONize\App\Easy; //Namespace declaration for the JSONize\App package
 
 use JSONize\System\Traits\HasAttribute;
+use JSONize\System\Traits\Easy\MethodCaller;
 use JSONize\System\Traits\HasStatus;
 use JSONize\System\Traits\HasStructure; // Importing the HasStructure trait from the JSONize\System\Traits namespace
-use JSONize\System\Traits\MethodCaller; // Importing the MethodCaller trait from the JSONize\System\Traits namespace
-use JSONize\System\Traits\Singleton; // Importing the Singleton trait from the JSONize\System\Traits namespace
 
 class Response
 {
-    use Singleton, MethodCaller, HasStatus, HasAttribute, HasStructure;
+    use MethodCaller, HasStatus, HasAttribute, HasStructure;
+
+    public function __destruct()
+    {
+        header('Content-Type: application/json'); // Set content type header to JSON
+        $this->extractHeaders(); // Extract and set custom headers
+        echo $this->makeReturnableJson(); // Format response data into JSON and return
+        exit;
+    }
 }
