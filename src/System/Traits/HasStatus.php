@@ -76,6 +76,33 @@ trait HasStatus
             case 226:
                 return [226, "IM Used"]; // Returns status code 226 and message.
                 break;
+            case 300:
+                return [300, "Multiple Choices"];
+                break;
+            case 301:
+                return [301, "Moved Permanently"];
+                break;
+            case 302:
+                return [302, 'Found (Previously "Moved temporarily")'];
+                break;
+            case 303:
+                return [303, "See Other (since HTTP/1.1)"];
+                break;
+            case 304:
+                return [304, "Not Modified"];
+                break;
+            case 305:
+                return [305, "Use Proxy (since HTTP/1.1)"];
+                break;
+            case 306:
+                return [306, "Switch Proxy"];
+                break;
+            case 307:
+                return [307, "Temporary Redirect (since HTTP/1.1)"];
+                break;
+            case 308:
+                return [308, "Permanent Redirect"];
+                break;
             case 404:
                 return [404, "Not Found"]; // Returns status code 404 and message.
                 break;
