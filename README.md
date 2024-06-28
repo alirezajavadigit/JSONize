@@ -82,7 +82,7 @@ use JSONize\App\Efficient\Response;
 $response = Response::getInstance();
 
 // Example 1: Success
-$response->message("Deleted Successfully")->end();
+$response->message("Deleted Successfully")->get();
 /*
 {
     "success": true,
@@ -96,7 +96,7 @@ $response->message("Deleted Successfully")->end();
 */
 
 // Example 2: Error
-$response->message("User Not Found")->status(404)->end();
+$response->message("User Not Found")->status(404)->get();
 /*
 {
     "success": false,
@@ -110,7 +110,7 @@ $response->message("User Not Found")->status(404)->end();
 */
 
 // Example 3: No Content
-$response->status(204)->end();
+$response->status(204)->get();
 /*
 {
     "success": true,
@@ -122,7 +122,7 @@ $response->status(204)->end();
     ]
 }
 */
-// Note: `end()` is important to use.
+// Note: `get()` is important to use.
 
 ```
 
