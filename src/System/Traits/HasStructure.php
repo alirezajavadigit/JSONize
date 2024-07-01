@@ -25,7 +25,7 @@ namespace JSONize\System\Traits;
 trait HasStructure
 {
     /**
-     * Set the get of the response.
+     * Set the response and get the formatted JSON response.
      *
      * @return string The formatted JSON response.
      * 
@@ -63,11 +63,43 @@ trait HasStructure
     private function makeReturnableJson(): string
     {
         $result = []; // Initialize empty array to store response data
+
         // Determine 'success' field based on HTTP status code
-        $result["success"] = (int)$this->getStatus() >= 200 && (int)$this->getStatus() <= 300 ? true : false;
-        $result["message"] = $this->getMessage(); // Set 'message' field
-        $result["data"] = $this->getData(); // Set 'data' field
-        $result["status"] = $this->getHttpStatus($this->getStatus()); // Set 'status' field
+        $status = $this->getStatus()[0]; // Extract the status code
+        $result["success"] = ($status >= 200 && $status < 300);
+
+        $message = $this->getMessage();
+        if ($message !== null) {
+            $result["message"] = $message; // Set 'message' field
+        }
+
+        $data = $this->getData();
+        if ($data[1] == "" || $data[1] == null) {
+            $result[] = $data[0]; // Set 'data' field without key
+        } else {
+            $result[$data[1]] = $data[0]; // Set 'data' field with key
+        }
+
+        if (!empty($this->getStatus()[1])) {
+            $result["status"] = [$status, $this->getStatus()[1]]; // Set 'status'
+        } else {
+            $result["status"] = $this->getHttpStatus($status); // Set 'status' using status code
+        }
+
+        // Remove keys based on hide flags
+        if ($this->getHideSuccess()) {
+            unset($result["success"]);
+        }
+        if ($this->getHideMessage()) {
+            unset($result["message"]);
+        }
+        if ($this->getHideData()) {
+            unset($result[$data[1]]);
+        }
+        if ($this->getHideStatus()) {
+            unset($result["status"]);
+        }
+
         return json_encode($result); // Encode response data into JSON and return
     }
 }
