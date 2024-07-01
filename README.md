@@ -68,6 +68,71 @@ Response::status(204);
     ]
 }
 */
+
+// Example 4: Data with Custom Key
+Response::data(["id" => 1, "name" => "Item"], "item");
+/*
+{
+    "success": true,
+    "message": null,
+    "item": {
+        "id": 1,
+        "name": "Item"
+    },
+    "status": [
+        200,
+        "ok"
+    ]
+}
+*/
+
+// Example 5: Data with Custom Key and Hide Status
+Response::data(["id" => 1, "name" => "Item"], "item")->hideStatus();
+/*
+{
+    "success": true,
+    "message": null,
+    "item": {
+        "id": 1,
+        "name": "Item"
+    }
+}
+*/
+
+// Example 6: Data with Custom Key and Custom Status Message
+Response::data(["id" => 1, "name" => "Item"], "item")->status(142, "example info")->hideMessage();
+/*
+{
+    "success": true,
+    "item": {
+        "id": 1,
+        "name": "Item"
+    },
+    "status": [
+        142,
+        "example info"
+    ]
+}
+*/
+
+// Example 7: Data with Metadata
+Response::data(["id" => 1, "name" => "Item"])
+         ->message("Item retrieved successfully")
+         ->status(200);
+/*
+{
+    "success": true,
+    "message": "Item retrieved successfully",
+    "data": {
+        "id": 1,
+        "name": "Item"
+    },
+    "status": [
+        200,
+        "ok"
+    ]
+}
+*/
 ```
 
 #### Efficient Memory Usage
@@ -76,7 +141,7 @@ For efficient usage and memory safety, use:
 
 ```php
 <?php
-//init
+// Init
 use JSONize\App\Efficient\Response;
 
 $response = Response::getInstance();
@@ -122,6 +187,74 @@ $response->status(204)->get();
     ]
 }
 */
+
+// Example 4: Data with Custom Key
+$response->data(["id" => 1, "name" => "Item"], "item")->get();
+/*
+{
+    "success": true,
+    "message": null,
+    "item": {
+        "id": 1,
+        "name": "Item"
+    },
+    "status": [
+        200,
+        "ok"
+    ]
+}
+*/
+
+// Example 5: Data with Custom Key And Hide Status
+$response->data(["id" => 1, "name" => "Item"], "item")->hideStatus()->get();
+/*
+{
+    "success": true,
+    "message": null,
+    "item": {
+        "id": 1,
+        "name": "Item"
+    },
+}
+*/
+
+// Example 6: Data with Custom Key And Custom Status Message
+$response->data(["id" => 1, "name" => "Item"], "item")->status(142, "example info")->get();
+/*
+{
+    "success": true,
+    "message": null,
+    "item": {
+        "id": 1,
+        "name": "Item"
+    },
+    "status": [
+        142,
+        "example info"
+    ]
+}
+*/
+
+// Example 7: Data with Metadata
+$response->data(["id" => 1, "name" => "Item"])
+         ->message("Item retrieved successfully")
+         ->status(200)
+         ->get();
+/*
+{
+    "success": true,
+    "message": "Item retrieved successfully",
+    "data": {
+        "id": 1,
+        "name": "Item"
+    },
+    "status": [
+        200,
+        "ok"
+    ]
+}
+*/
+
 // Note: `get()` is important to use.
 
 ```
