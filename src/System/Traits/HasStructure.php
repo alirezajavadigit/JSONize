@@ -74,10 +74,15 @@ trait HasStructure
         }
 
         $data = $this->getData();
-        if ($data[1] == "" || $data[1] == null) {
-            $result[] = $data[0]; // Set 'data' field without key
+        if (is_array($data)) {
+
+            if ($data[1] == "" || $data[1] == null) {
+                $result[] = $data[0]; // Set 'data' field without key
+            } else {
+                $result[$data[1]] = $data[0]; // Set 'data' field with key
+            }
         } else {
-            $result[$data[1]] = $data[0]; // Set 'data' field with key
+            $result["data"] = null; // Set 'data' field with key
         }
 
         if (!empty($this->getStatus()[1])) {
@@ -94,7 +99,11 @@ trait HasStructure
             unset($result["message"]);
         }
         if ($this->getHideData()) {
-            unset($result[$data[1]]);
+            if (is_array($data)) {
+                unset($result[$data[1]]);
+            } else {
+                unset($result["data"]);
+            }
         }
         if ($this->getHideStatus()) {
             unset($result["status"]);
