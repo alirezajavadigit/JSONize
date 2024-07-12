@@ -65,7 +65,7 @@ trait HasStructure
         $result = []; // Initialize empty array to store response data
 
         // Determine 'success' field based on HTTP status code
-        $status = $this->getStatus()[0]; // Extract the status code
+        $status = $this->getStatus(); // Extract the status code
         $result["success"] = ($status >= 200 && $status < 300);
 
         $message = $this->getMessage();
@@ -74,19 +74,19 @@ trait HasStructure
         }
 
         $data = $this->getData();
+        $dataKey = $this->getDataKey();
         if (is_array($data)) {
-
-            if ($data[1] == "" || $data[1] == null) {
-                $result[] = $data[0]; // Set 'data' field without key
+            if ($dataKey == "" || $dataKey == null) {
+                $result[] = $data; // Set 'data' field without key
             } else {
-                $result[$data[1]] = $data[0]; // Set 'data' field with key
+                $result[$dataKey] = $data; // Set 'data' field with key
             }
         } else {
             $result["data"] = null; // Set 'data' field with key
         }
 
-        if (!empty($this->getStatus()[1])) {
-            $result["status"] = [$status, $this->getStatus()[1]]; // Set 'status'
+        if (!empty($this->getStatusMessage())) {
+            $result["status"] = [$status, $this->getStatusMessage()]; // Set 'status'
         } else {
             $result["status"] = $this->getHttpStatus($status); // Set 'status' using status code
         }
@@ -100,7 +100,7 @@ trait HasStructure
         }
         if ($this->getHideData()) {
             if (is_array($data)) {
-                unset($result[$data[1]]);
+                unset($result[$dataKey]);
             } else {
                 unset($result["data"]);
             }
