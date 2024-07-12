@@ -9,7 +9,6 @@
 | @category  Library
 | @package   JSONize
 | @version   1.0.0
-| @author    Alireza Javadi
 | @license   MIT License
 | @link      https://github.com/alirezajavadigit/JSONize
 |--------------------------------------------------------------------------
@@ -28,7 +27,17 @@ trait HasAttribute
     /**
      * @var string|null $message Stores the message to be included in the response.
      */
-    private ?string $message = null; // Initialize the variable and add nullability
+    private ?string $message = null;
+
+    /**
+     * @var string|null $statusMessage Stores the status message to be included in the response.
+     */
+    private ?string $statusMessage = null;
+
+    /**
+     * @var string|null $dataKey Stores the key for the data payload in the response.
+     */
+    private ?string $dataKey = null;
 
     /**
      * @var mixed|null $data Stores the data payload to be included in the response.
@@ -38,7 +47,7 @@ trait HasAttribute
     /**
      * @var array $status Stores the HTTP status code and message for the response.
      */
-    private $status = [200, '']; // Change to array to store both code and message
+    private $status = [200, ''];
 
     /**
      * @var array $headers Stores the custom headers to be included in the response.
@@ -83,22 +92,32 @@ trait HasAttribute
      *
      * @return string|null The message included in the response.
      */
-    public function getMessage(): ?string // Add return type hint and nullability
+    public function getMessage(): ?string
     {
         return $this->message;
+    }
+
+    /**
+     * Get the data key included in the response.
+     *
+     * @return string|null The data key included in the response.
+     */
+    public function getDataKey(): ?string
+    {
+        return $this->dataKey;
     }
 
     /**
      * Set the data payload to be included in the response.
      *
      * @param mixed $data The data payload to be included in the response.
-     * @param mixed $key The key to store the data payload under.
+     * @param string $key The key to store the data payload under.
      * @return $this The current instance for method chaining.
      */
-    public function setData($data, mixed $key = "data")
+    public function setData(mixed $data, string $key = "data")
     {
-        $this->data = [$data, $key];
-
+        $this->data = $data;
+        $this->dataKey = $key;
         return $this;
     }
 
@@ -113,6 +132,16 @@ trait HasAttribute
     }
 
     /**
+     * Get the status message included in the response.
+     *
+     * @return string|null The status message included in the response.
+     */
+    public function getStatusMessage(): ?string
+    {
+        return $this->statusMessage;
+    }
+
+    /**
      * Set the HTTP status code and message for the response.
      *
      * @param int $status The HTTP status code for the response.
@@ -121,17 +150,17 @@ trait HasAttribute
      */
     public function setStatus(int $status, string $message = "")
     {
-        $this->status = [$status, $message];
-
+        $this->status = $status;
+        $this->statusMessage = $message;
         return $this;
     }
 
     /**
      * Get the HTTP status code and message for the response.
      *
-     * @return array The HTTP status code and message for the response.
+     * @return int The HTTP status code and message for the response.
      */
-    public function getStatus(): array // Add return type hint
+    public function getStatus()
     {
         return $this->status;
     }
@@ -154,7 +183,7 @@ trait HasAttribute
      *
      * @return array The custom headers included in the response.
      */
-    public function getHeaders(): array // Add return type hint
+    public function getHeaders(): array
     {
         return $this->headers;
     }
@@ -164,7 +193,7 @@ trait HasAttribute
      *
      * @return bool The value of hideStatus.
      */
-    public function getHideStatus(): bool // Add return type hint
+    public function getHideStatus(): bool
     {
         return $this->hideStatus;
     }
@@ -186,7 +215,7 @@ trait HasAttribute
      *
      * @return bool The value of hideData.
      */
-    public function getHideData(): bool // Add return type hint
+    public function getHideData(): bool
     {
         return $this->hideData;
     }
@@ -208,7 +237,7 @@ trait HasAttribute
      *
      * @return bool The value of hideMessage.
      */
-    public function getHideMessage(): bool // Add return type hint
+    public function getHideMessage(): bool
     {
         return $this->hideMessage;
     }
@@ -230,7 +259,7 @@ trait HasAttribute
      *
      * @return bool The value of hideSuccess.
      */
-    public function getHideSuccess(): bool // Add return type hint
+    public function getHideSuccess(): bool
     {
         return $this->hideSuccess;
     }
@@ -244,6 +273,20 @@ trait HasAttribute
     {
         $this->hideSuccess = true;
 
+        return $this;
+    }
+
+    /**
+     * Set the error message and status code.
+     *
+     * @param string $error The error message to be set.
+     * @param int $status The status code to be set. Defaults to 500.
+     * @return $this The current instance for method chaining.
+     */
+    public function setError(string $error, int $status = 500)
+    {
+        $this->message = $error;
+        $this->status = $status;
         return $this;
     }
 }
