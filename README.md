@@ -16,7 +16,7 @@ composer require alirezajavadi/jsonize
 
 Once JSONize is installed, you can start using it in your projects. Here's a basic example of how to use JSONize:
 
-# New Features in v1.5.1
+# New Features in v1.5.5
 
 #### Easy Syntax
 
@@ -130,6 +130,34 @@ Response::data(["id" => 1, "name" => "Item"])
     "status": [
         200,
         "ok"
+    ]
+}
+*/
+
+// Example 8: easy error message
+Response::error("Something went wrong");
+/*
+{
+    "success": false,
+    "message": "Something went wrong",
+    "data": null,
+    "status": [
+        500,
+        "Internal Server Error"
+    ]
+}
+*/
+or
+// Example 8: easy error message
+Response::error("Something went wrong", 400);
+/*
+{
+    "success": false,
+    "message": "Something went wrong",
+    "data": null,
+    "status": [
+        400,
+        "Bad Request"
     ]
 }
 */
@@ -251,6 +279,34 @@ $response->data(["id" => 1, "name" => "Item"])
     "status": [
         200,
         "ok"
+    ]
+}
+*/
+
+// Example 8: easy error message
+Response::error("Something went wrong")->get();
+/*
+{
+    "success": false,
+    "message": "Something went wrong",
+    "data": null,
+    "status": [
+        500,
+        "Internal Server Error"
+    ]
+}
+*/
+or
+// Example 8: easy error message
+Response::error("Something went wrong", 400)->get();
+/*
+{
+    "success": false,
+    "message": "Something went wrong",
+    "data": null,
+    "status": [
+        400,
+        "Bad Request"
     ]
 }
 */
