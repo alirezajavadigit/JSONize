@@ -33,7 +33,7 @@ trait HasStatus
     private function getHttpStatus($status)
     {
         // Informational responses (100–199)
-        switch ($status) {
+        switch ($status[0]) {
             case 100:
                 return [100, "Continue"];
             case 101:
