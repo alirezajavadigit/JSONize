@@ -37,7 +37,7 @@ trait HasAttribute
     /**
      * @var string|null $dataKey Stores the key for the data payload in the response.
      */
-    private ?string $dataKey = null;
+    private ?string $dataKey = "data";
 
     /**
      * @var mixed|null $data Stores the data payload to be included in the response.
@@ -47,7 +47,7 @@ trait HasAttribute
     /**
      * @var array $status Stores the HTTP status code and message for the response.
      */
-    private $status = [200, ''];
+    private $status = [200, 'Ok'];
 
     /**
      * @var array $headers Stores the custom headers to be included in the response.
@@ -83,7 +83,6 @@ trait HasAttribute
     public function setMessage(string $message)
     {
         $this->message = $message;
-
         return $this;
     }
 
@@ -126,7 +125,7 @@ trait HasAttribute
      *
      * @return mixed The data payload included in the response.
      */
-    public function getData()
+    public function getData(): mixed
     {
         return $this->data;
     }
@@ -160,7 +159,7 @@ trait HasAttribute
      *
      * @return int The HTTP status code and message for the response.
      */
-    public function getStatus()
+    public function getStatus(): array
     {
         return $this->status;
     }
@@ -174,7 +173,6 @@ trait HasAttribute
     public function setHeaders(array $headers)
     {
         $this->headers = $headers;
-
         return $this;
     }
 
@@ -206,7 +204,6 @@ trait HasAttribute
     public function setHideStatus()
     {
         $this->hideStatus = true;
-
         return $this;
     }
 
@@ -228,7 +225,6 @@ trait HasAttribute
     public function setHideData()
     {
         $this->hideData = true;
-
         return $this;
     }
 
@@ -250,7 +246,6 @@ trait HasAttribute
     public function setHideMessage()
     {
         $this->hideMessage = true;
-
         return $this;
     }
 
@@ -272,7 +267,6 @@ trait HasAttribute
     public function setHideSuccess()
     {
         $this->hideSuccess = true;
-
         return $this;
     }
 
