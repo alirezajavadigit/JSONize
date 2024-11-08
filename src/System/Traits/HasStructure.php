@@ -9,7 +9,6 @@
 | @category  Library
 | @package   JSONize
 | @version   1.0.0
-| @author    Alireza Javadi
 | @license   MIT License
 | @link      https://github.com/alirezajavadigit/JSONize
 |--------------------------------------------------------------------------
@@ -64,51 +63,55 @@ trait HasStructure
     {
         $result = []; // Initialize empty array to store response data
 
+        $status = $this->getStatus(); // Extract the status
         // Determine 'success' field based on HTTP status code
-        $status = $this->getStatus(); // Extract the status code
-        $result["success"] = ($status >= 200 && $status < 300);
+        $statusCode = $this->getStatus()[0]; // Extract the status code
+        $result["success"] = ($statusCode >= 200 && $statusCode < 300);
 
         $message = $this->getMessage();
         if ($message !== null) {
-            $result["message"] = $message; // Set 'message' field
+            $result["message"] = $message; // Set 'message' field if available
         }
 
         $data = $this->getData();
         $dataKey = $this->getDataKey();
         if (is_array($data)) {
             if ($dataKey == "" || $dataKey == null) {
-                $result[] = $data; // Set 'data' field without key
+                $result[] = $data; // Set 'data' field without a specific key
             } else {
-                $result[$dataKey] = $data; // Set 'data' field with key
+                $result[$dataKey] = $data; // Set 'data' field with a specified key
             }
         } else {
-            $result["data"] = null; // Set 'data' field with key
+            $result[$dataKey] = $data; // Set 'data' field for non-array data
         }
 
+        // Check and set the 'status' field if there's a custom status message
         if (!empty($this->getStatusMessage())) {
-            $result["status"] = [$status, $this->getStatusMessage()]; // Set 'status'
+            $result["status"] = [$status, $this->getStatusMessage()]; // Set 'status' with status code and message
         } else {
-            $result["status"] = $this->getHttpStatus($status); // Set 'status' using status code
+            $result["status"] = $this->getHttpStatus($status); // Set 'status' based on status code
         }
 
-        // Remove keys based on hide flags
+        // Conditional removal of keys based on user-defined hide flags
         if ($this->getHideSuccess()) {
-            unset($result["success"]);
+            unset($result["success"]); // Remove 'success' if hide flag is set
         }
         if ($this->getHideMessage()) {
-            unset($result["message"]);
+            unset($result["message"]); // Remove 'message' if hide flag is set
         }
         if ($this->getHideData()) {
             if (is_array($data)) {
-                unset($result[$dataKey]);
+                unset($result[$dataKey]); // Remove 'data' if it's an array and hide flag is set
             } else {
-                unset($result["data"]);
+                unset($result["data"]); // Remove 'data' if hide flag is set for non-array
             }
         }
         if ($this->getHideStatus()) {
-            unset($result["status"]);
+            unset($result["status"]); // Remove 'status' if hide flag is set
         }
 
-        return json_encode($result); // Encode response data into JSON and return
+        http_response_code($statusCode); // Set HTTP response code based on status
+
+        return json_encode($result); // Encode response data into JSON format and return
     }
 }
