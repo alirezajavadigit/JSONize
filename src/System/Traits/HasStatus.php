@@ -33,7 +33,7 @@ trait HasStatus
     private function getHttpStatus($status)
     {
         // Informational responses (100–199)
-        switch ($status[0]) {
+        switch ($status) {
             case 100:
                 return [100, "Continue"];
             case 101:
@@ -53,7 +53,7 @@ trait HasStatus
             case 199:
                 return [199, "Miscellaneous Warning"];
 
-            // Successful responses (200–299)
+                // Successful responses (200–299)
             case 200:
                 return [200, "OK"];
             case 201:
@@ -81,7 +81,7 @@ trait HasStatus
             case 299:
                 return [299, "Miscellaneous Persistent Warning"];
 
-            // Redirection messages (300–399)
+                // Redirection messages (300–399)
             case 300:
                 return [300, "Multiple Choices"];
             case 301:
@@ -101,7 +101,7 @@ trait HasStatus
             case 308:
                 return [308, "Permanent Redirect"];
 
-            // Client error responses (400–499)
+                // Client error responses (400–499)
             case 400:
                 return [400, "Bad Request"];
             case 401:
@@ -183,7 +183,7 @@ trait HasStatus
             case 499:
                 return [499, "Client Closed Request (Nginx)"];
 
-            // Server error responses (500–599)
+                // Server error responses (500–599)
             case 500:
                 return [500, "Internal Server Error"];
             case 501:
@@ -233,7 +233,7 @@ trait HasStatus
             case 599:
                 return [599, "Network connect timeout error"];
 
-            // Custom status codes
+                // Custom status codes
             case 701:
                 return [701, "Meh (Drupal)"];
             case 702:
@@ -277,7 +277,7 @@ trait HasStatus
             case 783:
                 return [783, "GSM 7-bit and 8-bit text encoding error (Custom)"];
 
-            // Default case for unspecified status codes
+                // Default case for unspecified status codes
             default:
                 return [500, "Internal Server Error"];
         }
