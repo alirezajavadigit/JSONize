@@ -32,7 +32,7 @@ trait HasAttribute
     /**
      * @var string|null $statusMessage Stores the status message to be included in the response.
      */
-    private ?string $statusMessage = null;
+    private ?string $statusMessage = "Ok";
 
     /**
      * @var string|null $dataKey Stores the key for the data payload in the response.
@@ -47,12 +47,12 @@ trait HasAttribute
     /**
      * @var array $status Stores the HTTP status code and message for the response.
      */
-    private $status = [200, 'Ok'];
+    private $status = 200;
 
     /**
      * @var array $headers Stores the custom headers to be included in the response.
      */
-    private $headers = [];
+    private $headers = ["Access-Control-Allow-Origin" => "*", "Access-Control-Allow-Methods" => "GET, POST, OPTIONS", "Access-Control-Allow-Headers" => "Content-Type, Authorization", "Content-Type" => "application/json"];
 
     /**
      * @var bool $hideStatus Flag to hide the status in the response.
@@ -159,7 +159,7 @@ trait HasAttribute
      *
      * @return int The HTTP status code and message for the response.
      */
-    public function getStatus(): array
+    public function getStatus()
     {
         return $this->status;
     }
