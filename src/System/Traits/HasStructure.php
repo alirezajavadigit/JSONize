@@ -63,9 +63,8 @@ trait HasStructure
     {
         $result = []; // Initialize empty array to store response data
 
-        $status = $this->getStatus(); // Extract the status
         // Determine 'success' field based on HTTP status code
-        $statusCode = $this->getStatus()[0]; // Extract the status code
+        $statusCode = $this->getStatus(); // Extract the status code
         $result["success"] = ($statusCode >= 200 && $statusCode < 300);
 
         $message = $this->getMessage();
@@ -87,9 +86,9 @@ trait HasStructure
 
         // Check and set the 'status' field if there's a custom status message
         if (!empty($this->getStatusMessage())) {
-            $result["status"] = [$status, $this->getStatusMessage()]; // Set 'status' with status code and message
+            $result["status"] = [$statusCode, $this->getStatusMessage()]; // Set 'status' with status code and message
         } else {
-            $result["status"] = $this->getHttpStatus($status); // Set 'status' based on status code
+            $result["status"] = $this->getHttpStatus($statusCode); // Set 'status' based on status code
         }
 
         // Conditional removal of keys based on user-defined hide flags
