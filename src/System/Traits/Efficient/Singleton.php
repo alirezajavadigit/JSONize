@@ -56,16 +56,12 @@ trait Singleton
     /**
      * Prevent instance from being cloned.
      */
-    private function __clone()
-    {
-    }
+    private function __clone() {}
 
     /**
      * Prevent instance from being unserialized.
      */
-    public function __wakeup()
-    {
-    }
+    public function __wakeup() {}
 
     /**
      * Get the singleton instance of the class.
@@ -88,5 +84,18 @@ trait Singleton
         }
 
         return self::$instance;
+    }
+
+    /**
+     * Reset the singleton instance.
+     *
+     * This method sets the instance to null, ensuring that the next call to
+     * getInstance() will create a new instance. Useful for testing purposes.
+     *
+     * @return void
+     */
+    public static function resetInstance(): void
+    {
+        self::$instance = null;
     }
 }
