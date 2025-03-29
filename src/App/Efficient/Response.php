@@ -20,13 +20,13 @@
 |--------------------------------------------------------------------------
 */
 
-namespace JSONize\App\Efficient; //Namespace declaration for the JSONize\App package
+namespace JSONize\App\Efficient; 
 
 use JSONize\System\Traits\HasAttribute;
 use JSONize\System\Traits\Efficient\MethodCaller;
 use JSONize\System\Traits\Efficient\Singleton;
 use JSONize\System\Traits\HasStatus;
-use JSONize\System\Traits\HasStructure; // Importing the HasStructure trait from the JSONize\System\Traits namespace
+use JSONize\System\Traits\HasStructure; 
 
 class Response
 {
