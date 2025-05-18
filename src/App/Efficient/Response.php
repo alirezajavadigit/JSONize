@@ -8,7 +8,7 @@
 |--------------------------------------------------------------------------
 | @category  Library
 | @package   JSONize
-| @version   1.0.0
+| @version   1.8.1
 | @author    Alireza Javadi
 | @license   MIT License
 | @link      https://github.com/alirezajavadigit/JSONize
@@ -20,13 +20,13 @@
 |--------------------------------------------------------------------------
 */
 
-namespace JSONize\App\Efficient; 
+namespace JSONize\App\Efficient;
 
 use JSONize\System\Traits\HasAttribute;
 use JSONize\System\Traits\Efficient\MethodCaller;
 use JSONize\System\Traits\Efficient\Singleton;
 use JSONize\System\Traits\HasStatus;
-use JSONize\System\Traits\HasStructure; 
+use JSONize\System\Traits\HasStructure;
 
 class Response
 {

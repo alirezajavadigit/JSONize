@@ -8,7 +8,7 @@
 |--------------------------------------------------------------------------
 | @category  Library
 | @package   JSONize
-| @version   1.0.0
+| @version   1.8.1
 | @author    Alireza Javadi
 | @license   MIT License
 | @link      https://github.com/alirezajavadigit/JSONize

@@ -8,7 +8,7 @@
 |--------------------------------------------------------------------------
 | @category  Library
 | @package   JSONize
-| @version   1.0.0
+| @version   1.8.1
 | @license   MIT License
 | @link      https://github.com/alirezajavadigit/JSONize
 |--------------------------------------------------------------------------
@@ -35,7 +35,8 @@ trait HasStructure
     {
         header('Content-Type: application/json'); // Set content type header to JSON
         $this->extractHeaders(); // Extract and set custom headers
-        return $this->makeReturnableJson(); // Format response data into JSON and return
+        echo $this->makeReturnableJson(); // Format response data into JSON and echo
+        exit;
     }
 
     /**
