@@ -1,20 +1,36 @@
 {
     "name": "alirezajavadi/jsonize",
-    "description": "JSONize: Standardize JSON responses effortlessly! Ensure consistency in your applications with our streamlined library. Simplify data formatting, enhance readability, and save time. JSONize empowers developers to generate clean, organized JSON outputs, perfect for APIs, web, and mobile apps. Revolutionize your workflow today!",
+    "description": "Standardize JSON API responses with a fluent, chainable interface for PHP applications.",
     "type": "library",
     "license": "MIT",
+    "keywords": [
+        "json",
+        "api",
+        "response",
+        "rest",
+        "http",
+        "standardize"
+    ],
     "authors": [
         {
             "name": "Alireza Javadi",
             "email": "e@alirezajawadi.ir"
         }
     ],
+    "require": {
+        "php": "^8.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.5"
+    },
     "autoload": {
         "psr-4": {
             "JSONize\\": "src/"
         }
     },
-    "require-dev": {
-        "phpunit/phpunit": "^11.5"
+    "autoload-dev": {
+        "psr-4": {
+            "JSONize\\Tests\\": "tests/"
+        }
     }
 }
